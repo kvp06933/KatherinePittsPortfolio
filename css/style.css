@@ -1,0 +1,31 @@
+
+    
+.dark-mode{
+    background: #151e29;
+}
+.services-area .single-service {
+    
+    
+    margin-bottom: 30px;
+    padding: 38px 24px;
+    text-align: center;
+    transition: all 0.15s ease-in-out;
+  }
+  
+  .services-area .single-service .service-icon {
+    display: inline-block;
+    font-size: 50px;
+    margin-bottom: 22px;
+  }
+  
+  .services-area .single-service .service-title {
+    
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+  
+  .services-area .single-service .service-description {
+    margin-bottom: 0;
+  }
