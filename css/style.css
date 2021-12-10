@@ -3,6 +3,9 @@
 .dark-mode{
     background: #151e29;
 }
+.dark-mode .fab{
+  color: #fff;
+}
 .services-area .single-service {
     
     
@@ -29,3 +32,10 @@
   .services-area .single-service .service-description {
     margin-bottom: 0;
   }
+  
+ .project-card .card-img-holder{
+   max-height: 500px;
+   
+ }
+
+ 
