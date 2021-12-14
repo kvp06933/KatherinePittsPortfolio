@@ -474,27 +474,42 @@
 	<script src="/js/dark-mode.js"></script>   
 
 	<script>
-		document.addEventListener("DOMContentLoaded", function(){
-			fetch('//katydevblog.herokuapp.com/GetTopXPosts/3')
-			.then(response => response.json())
-			.then(function(data){
-				RenderApiData("blog1", data[0]);
-				RenderApiData("blog1", data[1]);
-				RenderApiData("blog1", data[2]);
-			});
+		//Write the code that hits my GetTopXPosts endpoint
+		//and uses the data that comes back to populate the Blog section
+		document.addEventListener("DOMContentLoaded", function() {
+		  fetch('https://shadowblogdemo.herokuapp.com/GetTopXPosts/3')
+		  .then(response => response.json())
+		  .then(function(data) {
+			RenderApiData("blog1", data[0]);
+			RenderApiData("blog2", data[1]);
+			RenderApiData("blog3", data[2]);
+		  });
 		});
-
 		function RenderApiData(id, data)
 		{
-			//Build a link out to the Blog details page for each of the incoming blogs
-			let blogLink = `//katydevblog.herokuapp.com/BlogPosts/Details/${data.slug}`;
-			
-			//Next I want to use the title data
-			let anchorText = document.querySelector(`#${id} > div.card-body > h5 > a`);
-			anchorText.text = data.title;
-			anchorText.setAttribute("href", blogLink);
+		  //Build a link out to the Blog details page for each of the incoming blogs
+		  //https://shadowblogdemo.herokuapp.com/JasonsBlog/PostDetails/post-number-20
+		  let blogLink = `https://katydevblog.herokuapp.com/BlogPosts/Details/${data.slug}`;
+		  //Next I want to use the Title data
+		  let anchorText = document.querySelector(`#${id} > div.card-body > h5 > a`);
+		  anchorText.text = data.title;
+		  anchorText.setAttribute("href", blogLink);
+		  //Now deal with the blog post image
+		  let anchorImage = document.querySelector(`#${id} > a`);
+		  anchorImage.setAttribute("href", blogLink);
+		  let image = document.querySelector(`#${id} > a > img`);
+		  let imageData = `data:${data.contentType};base64,${data.imageData}`;
+		  image.setAttribute("src", imageData);
+		  //Display the abstract
+		  let abstract = document.querySelector(`#${id} > div.card-body > p`);
+		  abstract.innerText = data.abstract;
+		  //Display the created info in the card footer
+		  let created = document.querySelector(`#${id} > div.card-footer > small`);
+		  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+		  let localDate = new Date(data.created).toLocaleDateString("en-us", options);
+		  created.innerHTML = `<span class="fw-bold">Created</span>: ${localDate} </br> <span class="fw-bold">Author</span>: Katherine Pitts`
 		}
-	</script>
+	  </script>
 	
 </body>
 </html> 
