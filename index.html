@@ -367,10 +367,10 @@
 				<h2 class="section-title font-weight-bold mb-5">Latest Blog Posts</h2>
 				<div class="row">
 					<div class="col-md-4 mb-5">
-						<div class="card blog-post-card">
+						<div id="blog1"class="card blog-post-card">
 							<img class="card-img-top img-fluid" src="/img/Abstract_colorful_triangles_background_generated.jpg" alt="image">
 							<div class="card-body">
-								<h5 class="card-title"><a class="theme-link" href="blog-post.html">9 Bootstrap Grid Every Developer Should Know</a></h5>
+								<h5 class="card-title"><a class="theme-link" href="blog-post.html"></a></h5>
 								<p class="card-text">All developers should have these 9 grids in there pocket to create mockups and layouts with ease.</p>
 								<p class="mb-0"><a class="text-link" href="blog-post.html">Read more &rarr;</a></p>
 								
@@ -381,10 +381,10 @@
 						</div><!--//card-->
 					</div><!--//col-->
 					<div class="col-md-4 mb-5">
-						<div class="card blog-post-card">
+						<div id="blog2" class="card blog-post-card">
 							<img class="card-img-top img-fluid" src="/img/software-engineers-vector.png" alt="image">
 							<div class="card-body">
-								<h5 class="card-title"><a class="theme-link" href="blog-post.html">What Is MVC?</a></h5>
+								<h5 class="card-title"><a class="theme-link" href="blog-post.html"></a></h5>
 								<p class="card-text">Learn all about the MVC design pattern, and why it's so useful.</p>
 								<p class="mb-0"><a class="text-link" href="blog-post.html">Read more &rarr;</a></p>
 							</div>
@@ -395,12 +395,12 @@
 						</div><!--//card-->
 					</div><!--//col-->
 					<div class="col-md-4 mb-5">
-						<div class="card blog-post-card">
+						<div id="blog3" class="card blog-post-card">
 							<img class="img-fluid" src="/img/vecteezy_syringe-injection-vaccine-isometric-icon_.jpg" alt="image">
 							<div class="card-body">
-								<h5 class="card-title"><a class="theme-link" href="blog-post.html">Service Injection</a></h5>
+								<h5 class="card-title"><a class="theme-link" href="blog-post.html"></a></h5>
 								<p class="card-text">How to use service injection in your MVC project.</p>
-								<p class="mb-0"><a class="text-link" href="blog-post.html">Read more &rarr;</a></p>
+								<p class="mb-0"><a class="text-link" href="">Read more &rarr;</a></p>
 							</div>
 							<div class="card-footer">
 								<!-- <small class="text-muted">Published 3 weeks ago</small> -->
@@ -472,6 +472,29 @@
 	<!-- Dark Mode -->
 	<script src="/js/js-cookie.min.js"></script>
 	<script src="/js/dark-mode.js"></script>   
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function(){
+			fetch('//katydevblog.herokuapp.com/GetTopXPosts/3')
+			.then(response => response.json())
+			.then(function(data){
+				RenderApiData("blog1", data[0]);
+				RenderApiData("blog1", data[1]);
+				RenderApiData("blog1", data[2]);
+			});
+		});
+
+		function RenderApiData(id, data)
+		{
+			//Build a link out to the Blog details page for each of the incoming blogs
+			let blogLink = `//katydevblog.herokuapp.com/BlogPosts/Details/${data.slug}`;
+			
+			//Next I want to use the title data
+			let anchorText = document.querySelector(`#${id} > div.card-body > h5 > a`);
+			anchorText.text = data.title;
+			anchorText.setAttribute("href", blogLink);
+		}
+	</script>
 	
 </body>
 </html> 
