@@ -497,7 +497,7 @@ let RenderApiData = (id, data) => {
     
   //Step 1: Get references to the card and card body 
   let card = document.querySelector(`#${id}`);
-  let cardBody = card.querySelector('div.card');
+  let cardBody = card.querySelector('div.card-body');
   //Step 2: Setup a few pieces of data that will be used throughout the card
   let imageData = `data:${data.imageType};base64,${data.imageData}`;
   let blogLink = `${apiBaseUrl}/BlogPosts/Details?slug=${data.slug}`;
